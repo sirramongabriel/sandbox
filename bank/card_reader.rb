@@ -1,13 +1,14 @@
 require 'spec_helper'
-require 'account'
-require 'transact'
+require './account'
+require './transact'
 
 class CardReader
 
   def initialize
-    PASSCODE = '1234'
     @pass_code = ''
   end
+
+  PASSCODE = '1234'
 
   def scan
     puts 'Scanning card for authentication'

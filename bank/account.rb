@@ -1,17 +1,24 @@
-require 'transact'
-require 'card_reader'
 require 'spec_helper'
+# require 'transact'
+# require 'card_reader'
 
 class Account
   def initialize(*args)
-    @balance = args[:balance]
-    @history = args[:history]
+    @balance = 0
+    @transact = Transact.new
+    # @history = args[:history]
   end
 
-  def withdraw
+  def amount 
+    @transact.amount
   end
 
-  def deposit
+  def withdraw(amount)
+    @balance -= amount
+  end
+
+  def deposit(amount)
+    @balance += amount
   end
 
   def balance
@@ -19,7 +26,7 @@ class Account
   end
 
   def history
-    @history
+    Transact.count 
   end
 
   def balance=(new_balance)

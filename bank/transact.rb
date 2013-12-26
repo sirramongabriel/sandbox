@@ -1,38 +1,36 @@
 require 'spec_helper'
-require 'account'
-require 'card_reader'
+require './account'
+require './card_reader'
 
 class Transact
   def initialize(*args)
-    @ammount = args[:ammount]
-    @status = args[:status]
+    # @@count += 1
+    @amount = 0
   end
 
-  def type
+  def self.count
+    @@count
   end
 
-  def status
-    @status
+  def amount
+    @amount
   end
 
-  def ammount
-    @ammount
+  def amount=(new_amount)
+    @amount = new_ammount
   end
 
-  def status=(new_status)
-    @status = new_status
+  def dispense(amount)
+    puts "Withdrawal of $#{amount} success. Please take your FAKE cash."
+    puts "Your current balance is: #{@balance}"
   end
 
-  def ammount=(new_ammount)
-    @ammount = new_ammount
-  end
-
-  def dispense
-  end
-
-  def receive
+  def receive(amount)
+    puts ""
   end
 
   def transfer
   end
+
+
 end
