@@ -4,12 +4,8 @@ require './card_reader'
 
 class Transact
   def initialize(*args)
-    # @@count += 1
-    @amount = 0
-  end
-
-  def self.count
-    @@count
+    @amount = gets.chomp.to_f
+    @account = args[:account]
   end
 
   def amount
@@ -21,16 +17,13 @@ class Transact
   end
 
   def dispense(amount)
-    puts "Withdrawal of $#{amount} success. Please take your FAKE cash."
-    puts "Your current balance is: #{@balance}"
+    @account.balance.to_f
+    puts "Withdrawal success of $#{amount}. Please take your FAKE cash."
+    puts "Your new balance is: #{@balance}"
   end
 
   def receive(amount)
-    puts ""
+    puts "Deposit success of $#{amount}. We appreciate your business."
+    puts "Your new balance is: #{@balance}"
   end
-
-  def transfer
-  end
-
-
 end

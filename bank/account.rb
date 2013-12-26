@@ -1,6 +1,6 @@
 require 'spec_helper'
-# require 'transact'
-# require 'card_reader'
+require './transact'
+require './card_reader'
 
 class Account
   def initialize(*args)
