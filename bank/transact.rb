@@ -17,7 +17,7 @@ class Transact
   end
 
   def amount=(new_amount)
-    @amount = new_ammount
+    @amount = new_amount.to_f
   end
 
   def dispense(amount)
