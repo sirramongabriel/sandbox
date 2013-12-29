@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'Account' do
   let(:account) { FactoryGirl.build(:account) }
   let(:transact) { FactoryGirl.build(:transact) }
+
   context 'upon object creation' do
     it 'requires a default balance' do
       expect(account.balance).to eql 0.00

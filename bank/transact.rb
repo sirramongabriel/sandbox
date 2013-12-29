@@ -3,13 +3,15 @@ require './account'
 require './card_reader'
 
 class Transact
-  def amount
-    @amount
-  end
+  attr_accessor :amount
 
-  def amount=(new_amount)
-    @amount = new_amount.to_f
-  end
+  # def amount
+  #   @amount
+  # end
+
+  # def amount=(new_amount)
+  #   @amount = new_amount.to_f
+  # end
 
   def dispense(amount)
     @account.balance.to_f
