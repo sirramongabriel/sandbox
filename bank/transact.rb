@@ -3,11 +3,6 @@ require './account'
 require './card_reader'
 
 class Transact
-  def initialize(*args)
-    @amount = gets.chomp.to_f
-    @account = args[:account]
-  end
-
   def amount
     @amount
   end

@@ -5,7 +5,7 @@ describe 'Account' do
   let(:transact) { FactoryGirl.build(:transact) }
   context 'upon object creation' do
     it 'requires a default balance' do
-      expect(account.balance).to eql 0
+      expect(account.balance).to eql 0.00
     end
   end
 
@@ -17,9 +17,9 @@ describe 'Account' do
     end
 
     it 'does not return previous balance after a deposit' do
-      transact.amount = 12.95
+      transact.amount = 1.00
       account.balance += transact.amount
-      expect(account.balance).not_to eql 0
+      expect(account.balance).not_to eql 2.00
     end
   end
 
