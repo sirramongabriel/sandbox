@@ -1,31 +1,36 @@
-require 'spec_helper'
 require './account'
 require './transact'
 
 class CardReader
 
-  def initialize
+  def initialize(options = {})
+    @account = Account.new
     @pass_code = ''
   end
 
   PASSCODE = '1234'
 
-  def scan
-    puts 'Scanning card for authentication'
-    puts 'Please enter your passcode to continue: '
-    @pass_code = gets.chomp.downcase
+  def start
+    loop do
+      authorize while !authorized?
+      selection = get_menu_selection
+      perform_action(selection)
+      say_goodbye
+      deauthorize
+    end
   end
 
   def authorize
-    return greeting if authorized?
-    return scan unless authorized?
+    puts 'Scanning card for authentication'
+    puts 'Please enter your passcode to continue: '
+    @pass_code = gets.chomp.downcase
   end
 
   def authorized?
     return true if @pass_code == PASSCODE
   end
 
-  def greeting
+  def get_menu_selection
     puts 'Welcome to Fake Bank, where the transactions are real'
     puts 'but the money is fake!'
     puts "Press '1' for deposits"
@@ -35,23 +40,40 @@ class CardReader
     transaction_option = gets.chomp.downcase
   end
 
-  def authenticate(scan)
-    if scan == PASSCODE
-      case greeting
-      when '1'
-        puts 'Initiate deposit function'
-      when '2'
-        puts 'Initiate withdrawal function'
-      when '3'
-        puts 'GET balance'
-      when '4'
-        puts 'GET transaction history'
-      else 
-        puts 'Please enter a selection on the menu'
-      end
-    else
-      puts 'There was an error authenticating your account, try again'
-      scan
+  def perform_action(selection)
+    case greeting
+    when '1'
+      puts 'Initiate deposit function'
+      deposit
+    when '2'
+      puts 'Initiate withdrawal function'
+      withdraw
+    when '3'
+      puts 'GET balance'
+      show_balance
+    when '4'
+      puts 'GET transaction history'
+      show_history
+    else 
+      puts 'Please enter a selection on the menu'
     end
   end
+
+  def deposit
+    puts 'Enter amount'
+    amount = gets.to_f
+    @account.deposit(amount)
+  end
+
+  def withdraw
+    puts 'How much'
+    amount = gets.to_f
+    @account.withdraw(amount)
+  end
+
+  def show_balance
+    @account.balance
+  end
+
+  def amount
 end
